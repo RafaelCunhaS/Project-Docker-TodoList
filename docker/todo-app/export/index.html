@@ -1,0 +1,511 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+
+	<title>Reveal JS presentation</title>
+
+	<meta name="description" content="A framework for easily creating beautiful presentations using HTML">
+	<meta name="author" content="Hakim El Hattab">
+
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	<link rel="stylesheet" href="libs/reveal.js/4.1.3/reset.css">
+	<link rel="stylesheet" href="libs/reveal.js/4.1.3/reveal.css">
+
+	
+	
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+
+	  <!-- highlight Theme -->
+  	
+	  <link rel="stylesheet" href="libs/highlight.js/11.3.1/styles/monokai.min.css">
+	
+	
+		
+	<link rel="stylesheet" href="libs/reveal.js/4.1.3/plugin/chalkboard/style.css">
+	
+	
+	
+		<link rel="stylesheet" href="libs/reveal.js/4.1.3/plugin/customcontrols/style.css">
+	
+	<link rel="stylesheet" href="libs/styles/tasklist.css">
+
+
+
+  <!-- Revealjs Theme -->
+  
+  	<link rel="stylesheet" href="libs/reveal.js/4.1.3/theme/black.css" id="theme">
+  
+  
+
+
+  <!-- Revealjs Theme -->
+  
+
+ 
+</head>
+
+<body>
+  
+
+
+  <div class="reveal">
+
+    <!-- Any section element inside of this container is displayed as a slide -->
+    <div class="slides">
+
+      
+
+
+    
+        <section >
+            
+            <ul>
+<li><a href="#trybe-todo-app-%EF%B8%8F-">Trybe Todo-App 🖥️ 📝</a>
+<ul>
+<li><a href="#requisitos">Requisitos</a></li>
+<li><a href="#instala%C3%A7%C3%A3o">Instalação</a>
+<ul>
+<li><a href="#estrutura-do-aplicativo">Estrutura do aplicativo</a></li>
+<li><a href="#com-quem-devo-me-preocupar-primeiro">Com quem devo me preocupar primeiro?</a>
+<ul>
+<li><a href="#instalando-o-back-end">Instalando o back-end</a></li>
+<li><a href="#instalando-o-front-end">Instalando o front-end</a></li>
+<li><a href="#utilizando-o-aplicativo-de-testes">Utilizando o aplicativo de testes</a></li>
+<li><a href="#dicas-sobre-a-conteineriza%C3%A7%C3%A3o-de-aplica%C3%A7%C3%B5es-nodejs">Dicas sobre a conteinerização de aplicações NodeJS</a></li>
+<li><a href="#aproveitando-os-arquivos-node_modulestargz">Aproveitando os arquivos <code>node_modules.tar.gz</code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3>Trybe Todo-App 🖥️ 📝</h3>
+<p>Olá! Esse é o aplicativo de tarefas <strong>Trybe Todo-App</strong>!</p>
+<p>Com ele, você pode se organizar de maneira simples, adicionando, marcando e/ou removendo suas tarefas.</p>
+<p>Uma verdadeira <em>mão-na-roda</em> para acompanhar seu progresso!</p>
+<p><img src="./intro.gif" alt="Alt Text"></p>
+<h4>Requisitos</h4>
+<ul>
+<li><a href="https://github.com/nodesource/distributions/blob/master/README.md#debinstall">NodeJS LTS</a> (14 ou mais).
+<ul>
+<li>O Sistema Operacional <a href="https://github-com.translate.goog/nodejs/build/issues/2168?_x_tr_sl=en&amp;_x_tr_tl=pt&amp;_x_tr_hl=pt-BR&amp;_x_tr_pto=nui">deve suportar o NodeJS</a>.</li>
+<li>Aplicações como o <code>create-react-app</code> <a href="https://pt-br.reactjs.org/docs/create-a-new-react-app.html#create-react-app">requerem essa versão mínima</a> para funcionar corretamente</li>
+</ul>
+</li>
+</ul>
+<h4>Instalação</h4>
+<p>Esse é um aplicativo em <a href="https://nodejs.org/pt-br/about/">NodeJS</a>, que possui <strong>dois componentes principais</strong> (<code>front</code> e <code>back</code>) e um <strong>teste de saúde da aplicação</strong>:</p>
+<ul>
+<li><code>Front-end</code> Essa aplicação consome nossa API e nos retorna nossa lista;</li>
+<li><code>Back-end</code> Onde a <strong>mágica</strong> acontece! Nosso back-end possui um banco de dados interno, onde são salvas nossas tarefas;</li>
+<li><code>Testes</code> Onde validamos a comunicação entre <code>front</code> e <code>back-end</code>.</li>
+</ul>
+<h5>Estrutura do aplicativo</h5>
+<pre><code class="language-bash">todo-app/
+├── README.md # este arquivo
+├── intro.gif # demonstração
+├── back-end # responsável por processar nossos dados através de requisições
+│   ├── node_modules.tar.gz # pacote opcional, para facilitar a criação de imagens no Docker
+│   ├── package.json # principal componente da aplicação
+│   ├── package-lock.json # arquivo responsável por otimizar a instalação em outros ambientes
+│   └── src
+│       ├── api
+│       │   ├── routes.js
+│       │   └── server.js
+│       ├── controllers
+│       │   └── Tasks.js
+│       ├── database
+│       │   ├── tasks.bkp.json
+│       │   └── tasks.json
+│       ├── models
+│       │   └── Tasks.js
+│       └── utils
+│           └── fileHandler.js
+├── front-end # responsável por ser uma interface amigável para nosso back-end
+│   ├── node_modules.tar.gz # pacote opcional, para facilitar a criação de imagens no Docker
+│   ├── package.json # principal componente da aplicação
+│   ├── package-lock.json # arquivo responsável por otimizar a instalação em outros ambientes
+│   ├── public
+│   │   ├── favicon.ico
+│   │   ├── index.html
+│   │   ├── logo192.png
+│   │   ├── logo512.png
+│   │   ├── manifest.json
+│   │   └── robots.txt
+│   ├── README.md
+│   └── src
+│       ├── App.css
+│       ├── App.js
+│       ├── App.test.js
+│       ├── components
+│       │   ├── ItemAdd
+│       │   │   ├── index.jsx
+│       │   │   └── styles.css
+│       │   ├── ItemList
+│       │   │   ├── index.jsx
+│       │   │   └── styles.css
+│       │   ├── ItemRow
+│       │   │   ├── index.jsx
+│       │   │   └── styles.css
+│       │   └── TaskReset
+│       │       └── index.jsx
+│       ├── context
+│       │   └── taskContext.js
+│       ├── index.css
+│       ├── index.js
+│       ├── logo.png
+│       ├── reportWebVitals.js
+│       ├── setupTests.js
+│       └── utils
+│           └── fetch.js
+└── tests # responsável por validar essa comunicação
+    ├── e2e
+    │   └── health_status.test.js
+    ├── jest.config.js
+    ├── node_modules.tar.gz # pacote opcional, para facilitar a criação de imagens no Docker
+    ├── package.json # principal componente da aplicação
+    └── package-lock.json # arquivo responsável por otimizar a instalação em outros ambientes
+</code></pre>
+<h5>Com quem devo me preocupar primeiro?</h5>
+<ul>
+<li>
+<p>Como o <code>back-end</code> é o coração 💚 dessa aplicação, é possível utilizar ele sem um <code>Front-end</code>, nesse caso, é possível consumi-lo através de requisições REST, através de seu aplicativo de requisições favorito, como Postman, Insomnia, HTTPie, etc!</p>
+<ul>
+<li>É recomendável roda-lo primeiro para garantir que o front-end tem da onde conseguir as informações de tarefas!</li>
+</ul>
+</li>
+<li>
+<p>O <code>front-end</code>, por outro lado, dá uma cara mais elegante 🌟 para nosso app, e é preferencialmente recomendado para consumo do nosso back-end!</p>
+<ul>
+<li>É recomendável deixa-lo por segundo, já que ainda que o <code>front</code> funcione, ele precisa de uma API para consumir - papel do nosso back-end.</li>
+</ul>
+</li>
+</ul>
+<h6>Instalando o back-end</h6>
+<ul>
+<li>Acesse a pasta <code>./todo-app/back-end</code>;</li>
+<li>Instalar a aplicação utilizando o comando <code>npm install</code>;</li>
+<li>O processo não deve retornar erros. <code>Warns</code> <em>(Avisos)</em> não impedem seu funcionamento;</li>
+<li>Rodar a aplicação com <code>npm start</code>;</li>
+<li>Por padrão, essa aplicação funciona a partir da porta <code>3001</code>;</li>
+</ul>
+<h6>Instalando o front-end</h6>
+<ul>
+<li>Acesse a pasta <code>./todo-app/front-end</code>;</li>
+<li>Instalar a aplicação utilizando o comando <code>npm install</code>;</li>
+<li>O processo não deve retornar erros. <code>Warns</code> <em>(Avisos)</em> não impedem seu funcionamento;</li>
+<li>Rodar a aplicação com <code>npm start</code>;</li>
+<li>Esse aplicativo requer, <strong>excepcionalmente</strong>, um arquivo <code>.env</code>, já contido em sua pasta no repositório;</li>
+<li>Por padrão, essa aplicação funciona a partir da porta <code>3000</code>;</li>
+<li>Essa aplicação pode receber variáveis de ambiente para mudar o acesso do <code>back-end</code>:
+<ul>
+<li><code>REACT_APP_API_HOST</code>: padrão <code>localhost</code>;
+<ul>
+<li><em>(Docker)</em> Aqui você deve indicar o nome do container do <code>back-end</code>;</li>
+</ul>
+</li>
+<li><code>REACT_APP_API_PORT</code>: padrão <code>3001</code>.
+<ul>
+<li><em>(Docker)</em> Aqui você deve indicar a porta que você definiu internamente no container do <code>back-end</code>;</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h6>Utilizando o aplicativo de testes</h6>
+<ul>
+<li>⚠️ Essa aplicação só funciona <strong>se associada a uma rede Docker</strong>;</li>
+<li>Acesse a pasta <code>./todo-app/tests</code>;</li>
+<li>Instalar a aplicação utilizando o comando <code>npm install</code>;</li>
+<li>O processo não deve retornar erros. <code>Warns</code> <em>(Avisos)</em> não impedem seu funcionamento;</li>
+<li>Rodar a aplicação com <code>npm test</code>;</li>
+<li>Essa aplicação pode receber variáveis de ambiente para mudar o acesso ao front-end:
+<ul>
+<li><code>FRONT_HOST</code>: padrão <code>localhost</code>;
+<ul>
+<li><em>(Docker)</em> Aqui você deve indicar o nome do container do <code>front-end</code>;</li>
+</ul>
+</li>
+<li><code>FRONT_PORT</code>: padrão <code>3000</code>.
+<ul>
+<li><em>(Docker)</em> Aqui você deve indicar a porta que você definiu internamente no container do <code>front-end</code>;</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h6>Dicas sobre a conteinerização de aplicações NodeJS</h6>
+<p>⚠️ Aplicações <code>NodeJS</code>, necessitam de algumas coisas para funcionar:</p>
+<ul>
+<li>Um <code>package.json</code>, que provê informações e scripts de inicialização para a aplicação, <strong>esse arquivo é obrigatório no funcionamento e deve estar no container do app referido</strong>;</li>
+<li>Um <code>package-lock.json</code>, que provê um “cache” de pacotes, necessários a aplicação, <strong>esse arquivo não precisa ser copiado para o container, mas ele precisa existir para a aplicação funcionar, ou seja, caso ele não exista no container, você precisará instalar a aplicação <code>NodeJS</code>, dentro do container, obrigatoriamente</strong>;</li>
+<li>Uma pasta <code>node_modules</code>, <strong>que é criada <em>(ou aproveitada, caso já exista)</em> durante a instalação - que é obrigatória - no container</strong>;</li>
+<li>Aplicativos fonte (<code>source</code>, <code>src</code>) e complementares (por exemplo <code>public</code>, <code>.env*</code>), <strong>esses arquivos são da aplicação propriamente dita e devem estar no container</strong>, caso não estejamos trabalhando apenas com <em>builds</em> ou <em>compilações</em> desses aplicativos <em>(que podem ter funcionamento diferente)</em>.</li>
+</ul>
+<h6>Aproveitando os arquivos <code>node_modules.tar.gz</code></h6>
+<p>Aplicações <code>NodeJS</code>, durante suas respectivas instalações, geram uma pasta nomeada como <code>node_modules</code>, que contém tudo o que a aplicação precisa pra funcionar.</p>
+<p>Esse repositório já prove em cada serviço, um pacote compactado contendo essas dependências, chamado <code>node_modules.tar.gz</code>.</p>
+<p>Dessa forma, em um <code>Dockerfile</code>, é possível aproveitar esse recurso para adicionar esse pacote à imagem, lembrando aqui, que o comando <code>ADD</code> do <code>Dockerfile</code>, além de adicionar arquivos, também faz a extração de pacotes, como nesse caso.</p>
+<p>Caso você opte por utilizar esse recurso, o <em>build</em> de suas imagens levará menos tempo, já que, nesse caso, <strong>a instalação será mais rápida, aproveitando esses recursos</strong>.</p>
+
+            </section>
+    
+
+
+    </div>
+
+
+  </div>
+
+  	
+	<script src="libs/reveal.js/4.1.3/reveal.js"></script>
+	<script src="libs/reveal.js/4.1.3/plugin/zoom/zoom.js"></script>
+	<script src="libs/reveal.js/4.1.3/plugin/notes/notes.js"></script>
+	<script src="libs/reveal.js/4.1.3/plugin/search/search.js"></script>
+	<script src="libs/reveal.js/4.1.3/plugin/markdown/markdown.js"></script>
+	<script src="libs/reveal.js/4.1.3/plugin/highlight/highlight.js"></script>
+	<script src="libs/reveal.js/4.1.3/plugin/menu/menu.js"></script>
+	<script src="libs/reveal.js/4.1.3/plugin/math/math.js"></script>
+
+	<script src="libs/reveal.js/4.1.3/plugin/fullscreen/plugin.js"></script>
+  
+  	<script src="libs/reveal.js/4.1.3/plugin/animate/plugin.js"></script>
+  	<script src="libs/reveal.js/4.1.3/plugin/animate/svg.min.js"></script>
+  
+  	<script src="libs/reveal.js/4.1.3/plugin/anything/plugin.js"></script>
+	  <script src="libs/reveal.js/4.1.3/plugin/anything/Chart.min.js"></script>
+	<script src="libs/reveal.js/4.1.3/plugin/anything/d3/d3.v3.min.js"></script>				
+	<script src="libs/reveal.js/4.1.3/plugin/anything/d3.patch.js"></script>			
+	<script src="libs/reveal.js/4.1.3/plugin/anything/d3/queue.v1.min.js"></script>		
+	<script src="libs/reveal.js/4.1.3/plugin/anything/d3/topojson.v1.min.js"></script>		
+	<script src="libs/reveal.js/4.1.3/plugin/anything/function-plot.js"></script>
+
+ <!--	<script src="libs/reveal.js/4.1.3/plugin/audio-slideshow/plugin.js"></script>  -->
+<!--	<script src="libs/reveal.js/4.1.3/plugin/audio-slideshow/recorder.js"></script>-->
+<!--	<script src="libs/reveal.js/4.1.3/plugin/audio-slideshow/RecordRTC.js"></script>-->
+
+<script src="libs/reveal.js/4.1.3/plugin/chalkboard/plugin.js"></script>
+	<script src="libs/reveal.js/4.1.3/plugin/customcontrols/plugin.js"></script>
+	<script src="libs/reveal.js/4.1.3/plugin/embed-tweet/plugin.js"></script>
+
+	<script src="libs/reveal.js/4.1.3/plugin/chart/chart.min.js"></script>
+	<script src="libs/reveal.js/4.1.3/plugin/chart/plugin.js"></script>
+
+  <script>
+
+		const printPlugins = [
+			RevealNotes, 
+			RevealHighlight,
+			RevealMath,
+			RevealAnimate,
+			RevealChalkboard, 
+			RevealEmbedTweet,
+			RevealChart,
+		];
+
+		const plugins =  [...printPlugins,
+		RevealZoom, 
+		RevealSearch, 
+				RevealMarkdown, 
+				RevealMenu, 
+				RevealFullscreen,
+				RevealAnything,
+				//RevealAudioSlideshow,
+				//RevealAudioRecorder,
+				RevealCustomControls, 
+				// poll
+				// question
+				// seminar
+				 ]
+
+
+		// Also available as an ES module, see:
+		// https://revealjs.com/initialization/
+		Reveal.initialize({
+			controls: true,
+			controlsTutorial: true,
+			controlsLayout: 'bottom-right',
+			controlsBackArrows: 'faded',
+			progress: true,
+			slideNumber: false,
+			//#showSlideNumber "all" "print" "speaker"
+			hash: true,//#  hash: false,
+			//# respondToHashChanges: true,
+			//# history: false,
+			keyboard: true,
+			//#keyboardCondition: null,
+			overview: true,
+			center: true,
+			touch: true,
+			loop: false,
+			rtl: false,
+			//#navigationMode: 'default', linear grid
+			shuffle: false,
+			fragments: true,
+			fragmentInURL: false,
+			embedded: false,
+			help: true,
+			//#pause: true
+			showNotes: false,
+			autoPlayMedia: false, // TODO fix this to a nullable value
+			//#preloadIframes: null. true false
+			//#autoAnimate: true
+			//#autoAnimateMatcher: null,
+			//#autoAnimateEasing: 'ease',
+			//autoAnimateDuration: 1.0,
+			//#autoAnimateUnmatched: true
+			//#autoAnimateStyles: []
+			autoSlide: 0, // TODO fix this to a falseable value
+			autoSlideStoppable: true,
+			autoSlideMethod: '0',
+			defaultTiming: 120,
+			mouseWheel: false,
+			//#previewLinks: false
+			//#postMessage: true,  // TODO : this can cause issues with the vscode api ???
+			//#postMessageEvents: false,
+			//#focusBodyOnPageVisibilityChange: true,
+			transition: 'slide',
+			transitionSpeed: 'default',
+			backgroundTransition: 'fade',
+			//#pdfMaxPagesPerSlide: Number.POSITIVE_INFINITY,
+			//#pdfSeparateFragments: true,
+			//#pdfPageHeightOffset: -1,
+			viewDistance: 3,
+			//#mobileViewDistance: 2,
+			display: 'block',
+			//#hideInactiveCursor: true,
+			//#hideCursorTime: 5000
+
+			// Parallax Background
+			parallaxBackgroundImage: '',
+			parallaxBackgroundSize: '',
+			parallaxBackgroundHorizontal: 0,
+			parallaxBackgroundVertical: 0,
+			
+			//Presentation Size
+			width: 960,
+			height: 700,
+			margin: 0.04,
+			minScale: 0.2,
+			maxScale: 2,
+			disableLayout: false,
+
+			audio: {
+				prefix: 'audio/', 	// audio files are stored in the "audio" folder
+				suffix: '.ogg',		// audio files have the ".ogg" ending
+				textToSpeechURL: null,  // the URL to the text to speech converter
+				defaultNotes: false, 	// use slide notes as default for the text to speech converter
+				defaultText: false, 	// use slide text as default for the text to speech converter
+				advance: 0, 		// advance to next slide after given time in milliseconds after audio has played, use negative value to not advance
+				autoplay: false,	// automatically start slideshow
+				defaultDuration: 5,	// default duration in seconds if no audio is available
+				defaultAudios: true,	// try to play audios with names such as audio/1.2.ogg
+				playerOpacity: 0.05,	// opacity value of audio player if unfocused
+				playerStyle: 'position: fixed; bottom: 4px; left: 25%; width: 50%; height:75px; z-index: 33;', // style used for container of audio controls
+				startAtFragment: false, // when moving to a slide, start at the current fragment or at the start of the slide
+			},
+			
+			chalkboard: { // font-awesome.min.css must be available
+					//src: "chalkboard/chalkboard.json",
+					storage: "chalkboard-demo",
+				},
+			
+			customcontrols: {
+					controls: [
+      						{
+						  id: 'toggle-overview',
+						  title: 'Toggle overview (O)',
+						  icon: '<i class="fa fa-th"></i>',
+						  action: 'Reveal.toggleOverview();'
+						}
+						,
+						{ icon: '<i class="fa fa-pen-square"></i>',
+						  title: 'Toggle chalkboard (B)',
+						  action: 'RevealChalkboard.toggleChalkboard();'
+						},
+						{ icon: '<i class="fa fa-pen"></i>',
+						  title: 'Toggle notes canvas (C)',
+						  action: 'RevealChalkboard.toggleNotesCanvas();'
+						}
+				]
+			},
+			chart: {
+					defaults: { 
+						color: 'lightgray', // color of labels
+						scale: { 
+							beginAtZero: true, 
+							ticks: { stepSize: 1 },
+							grid: { color: "lightgray" } , // color of grid lines
+						},
+					},
+					line: { borderColor: [ "rgba(20,220,220,.8)" , "rgba(220,120,120,.8)", "rgba(20,120,220,.8)" ], "borderDash": [ [5,10], [0,0] ] }, 
+					bar: { backgroundColor: [ "rgba(20,220,220,.8)" , "rgba(220,120,120,.8)", "rgba(20,120,220,.8)" ]}, 
+					pie: { backgroundColor: [ ["rgba(0,0,0,.8)" , "rgba(220,20,20,.8)", "rgba(20,220,20,.8)", "rgba(220,220,20,.8)", "rgba(20,20,220,.8)"] ]},
+					radar: { borderColor: [ "rgba(20,220,220,.8)" , "rgba(220,120,120,.8)", "rgba(20,120,220,.8)" ]}, 
+			},
+			math: {
+				mathjax: 'https://cdn.jsdelivr.net/gh/mathjax/mathjax@2.7.8/MathJax.js',
+				config: 'TeX-AMS_HTML-full',
+				// pass other options into `MathJax.Hub.Config()`
+				TeX: { Macros: { RR: "{\\bf R}" } }
+				},
+				anything: [ 
+				{
+		className: "plot",
+		defaults: {width:500, height: 500, grid:true},
+		initialize: (function(container, options){ options.target = "#"+container.id; functionPlot(options) })
+	 },
+	 {
+		className: "chart",  
+		initialize: (function(container, options){ container.chart = new Chart(container.getContext("2d"), options);  })
+	 },
+	 {
+		className: "anything",
+		initialize: (function(container, options){ if (options && options.initialize) { options.initialize(container)} })
+	 },
+					],
+			// Learn about plugins: https://revealjs.com/plugins/
+			plugins: (window.location.search.match(/print-pdf/gi) ? printPlugins : plugins ) 
+		});
+			
+
+
+	    // Change chalkboard theme : 
+		function changeTheme(input) {
+			var config = {};
+			config.theme = input.value;
+			Reveal.getPlugin("RevealChalkboard").configure(config);
+			input.blur();
+		}
+
+		// // Handle the message inside the webview
+        // window.addEventListener('message', event => {
+
+        //     const message = event.data; // The JSON data our extension sent
+
+        //     switch (message.command) {
+        //         case 'refactor':
+        //             Reveal.toggleHelp();
+        //     }
+        // });
+
+		if (window.location.search.match(/print-pdf-now/gi)) {
+      		setTimeout(() => {
+				window.print();
+			  }, 2500);
+			
+    }
+		
+
+	</script>
+
+</body>
+
+</html>
