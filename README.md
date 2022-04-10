@@ -2,7 +2,7 @@
 
 Back-end project developed while studying at Trybe, a web development school.
 
-### Skills
+### Skills Developed
 On this project I was able to:
   * Use docker commands on the _CLI_ - Command line interface;
   * Create a docker container for a front-end application;
